@@ -37,6 +37,19 @@
       overflow-x: hidden;
     }
 
+    /* ================= 3D BACKGROUND CANVAS ================= */
+
+    #canvas3d {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+
     /* ================= NAVIGATION ================= */
 
     header {
@@ -105,6 +118,8 @@
       background:
         radial-gradient(circle at top right, rgba(0,255,174,0.12), transparent 30%),
         linear-gradient(135deg, #071018, #0b1c26);
+      position: relative;
+      z-index: 2;
     }
 
     .hero-container {
@@ -125,12 +140,14 @@
       border-radius: 30px;
       margin-bottom: 20px;
       font-size: 0.85rem;
+      animation: fadeInUp 0.8s ease;
     }
 
     .hero h1 {
       font-size: clamp(2.8rem, 6vw, 5.5rem);
       line-height: 1.05;
       margin-bottom: 20px;
+      animation: fadeInUp 0.8s ease 0.2s both;
     }
 
     .hero h1 span {
@@ -142,12 +159,14 @@
       color: var(--muted);
       font-size: 1.05rem;
       margin-bottom: 30px;
+      animation: fadeInUp 0.8s ease 0.4s both;
     }
 
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 15px;
+      animation: fadeInUp 0.8s ease 0.6s both;
     }
 
     .btn {
@@ -183,6 +202,9 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      animation: fadeInLeft 0.8s ease 0.4s both;
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
 
     .terminal-header {
@@ -208,6 +230,8 @@
 
     section {
       padding: 100px 25px;
+      position: relative;
+      z-index: 2;
     }
 
     .container {
@@ -246,6 +270,13 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px rgba(0, 255, 174, 0.1);
+      border-color: var(--primary);
     }
 
     .card h3 {
@@ -269,6 +300,12 @@
       background: rgba(0,0,0,0.18);
       border-radius: 10px;
       text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stat:hover {
+      transform: scale(1.05);
+      background: rgba(0, 255, 174, 0.08);
     }
 
     .stat h2 {
@@ -292,6 +329,13 @@
       padding: 25px;
       border-radius: 12px;
       border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .skill-category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px rgba(0, 255, 174, 0.1);
+      border-color: var(--primary);
     }
 
     .skill-category h3 {
@@ -331,6 +375,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 25px;
+      perspective: 1200px;
     }
 
     .project-card {
@@ -338,21 +383,34 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 25px;
-      transition: 0.3s;
+      transition: all 0.4s ease;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      position: relative;
+      height: 100%;
     }
 
     .project-card:hover {
-      transform: translateY(-8px);
+      transform: rotateY(5deg) rotateX(-5deg) translateZ(20px);
       border-color: var(--primary);
+      box-shadow: 
+        0 20px 40px rgba(0, 255, 174, 0.2),
+        0 0 20px rgba(0, 255, 174, 0.3);
     }
 
     .project-icon {
       font-size: 2rem;
       margin-bottom: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover .project-icon {
+      transform: rotateY(360deg) scale(1.1);
     }
 
     .project-card h3 {
       margin-bottom: 12px;
+      color: var(--text);
     }
 
     .project-card p {
@@ -373,6 +431,12 @@
       color: var(--primary);
       border-radius: 20px;
       font-size: 0.75rem;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover .tags span {
+      background: rgba(0, 255, 174, 0.25);
+      transform: scale(1.05);
     }
 
     /* ================= EXPERIENCE ================= */
@@ -396,6 +460,7 @@
       position: relative;
       padding-left: 60px;
       margin-bottom: 45px;
+      animation: fadeInUp 0.8s ease;
     }
 
     .timeline-dot {
@@ -407,6 +472,12 @@
       border-radius: 50%;
       background: var(--primary);
       box-shadow: 0 0 20px var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover .timeline-dot {
+      transform: scale(1.3);
+      box-shadow: 0 0 30px var(--primary);
     }
 
     .timeline-content {
@@ -414,6 +485,13 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover .timeline-content {
+      transform: translateX(10px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 40px rgba(0, 255, 174, 0.1);
     }
 
     .timeline-content h3 {
@@ -460,11 +538,13 @@
       color: white;
       border-radius: 6px;
       outline: none;
+      transition: all 0.3s ease;
     }
 
     input:focus,
     textarea:focus {
       border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(0, 255, 174, 0.2);
     }
 
     textarea {
@@ -476,6 +556,17 @@
       cursor: pointer;
       border: none;
       font-size: 1rem;
+      padding: 13px 25px;
+      background: var(--primary);
+      color: #00140d;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(0,255,174,0.35);
     }
 
     /* ================= FOOTER ================= */
@@ -486,6 +577,45 @@
       padding: 25px;
       color: var(--muted);
       font-size: 0.85rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ================= ANIMATIONS ================= */
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .float {
+      animation: float 3s ease-in-out infinite;
     }
 
     /* ================= MOBILE ================= */
@@ -520,6 +650,10 @@
       .menu-btn {
         display: block;
       }
+
+      .project-card:hover {
+        transform: translateY(-8px);
+      }
     }
 
     @media (max-width: 600px) {
@@ -545,6 +679,9 @@
 </head>
 
 <body>
+
+  <!-- 3D CANVAS BACKGROUND -->
+  <canvas id="canvas3d"></canvas>
 
   <!-- NAVIGATION -->
 
@@ -596,7 +733,7 @@
       </div>
 
 
-      <div class="terminal">
+      <div class="terminal float">
 
         <div class="terminal-header">
           asad@portfolio:~$
@@ -998,7 +1135,7 @@
           <div class="tags">
             <span>Networking</span>
             <span>VLAN</span>
-            <span>DNS & DHCP</span>
+            <span>Hands-on Learning</span>
           </div>
 
         </div>
@@ -1023,42 +1160,23 @@
       <div class="timeline">
 
         <div class="timeline-item">
-
           <div class="timeline-dot"></div>
-
           <div class="timeline-content">
-
             <h3>IT Systems Engineer</h3>
-
-            <div class="timeline-date">2018 - Present</div>
-
-            <p>
-              Senior IT support and infrastructure management. Responsibilities
-              include user support, network troubleshooting, system maintenance,
-              and IT operations coordination.
-            </p>
-
+            <div class="timeline-date">Ebryx | 2022 - Present</div>
+            <p>Supporting IT infrastructure, user systems, and enterprise operations. 
+               Managing technical troubleshooting, system administration, and IT support.</p>
           </div>
-
         </div>
 
         <div class="timeline-item">
-
           <div class="timeline-dot"></div>
-
           <div class="timeline-content">
-
             <h3>IT Support Specialist</h3>
-
-            <div class="timeline-date">2016 - 2018</div>
-
-            <p>
-              Technical support for IT infrastructure and user systems.
-              Troubleshot hardware, software, and network issues.
-            </p>
-
+            <div class="timeline-date">Gerry's dnata | 2018 - 2022</div>
+            <p>Provided comprehensive IT support, network troubleshooting, and infrastructure management.
+               Handled IT operations, user support, and system maintenance.</p>
           </div>
-
         </div>
 
       </div>
@@ -1074,17 +1192,16 @@
 
     <div class="container">
 
-      <div class="section-tag">Get in Touch</div>
+      <div class="section-tag">Get In Touch</div>
 
       <h2 class="section-title">Contact Me</h2>
 
       <div class="contact-grid">
 
         <div>
-
           <div class="contact-item">
             <span>Email</span>
-            <p>asad.ali@example.com</p>
+            <p>asadali862@gmail.com</p>
           </div>
 
           <div class="contact-item">
@@ -1093,22 +1210,16 @@
           </div>
 
           <div class="contact-item">
-            <span>LinkedIn</span>
-            <p>linkedin.com/in/asadali</p>
+            <span>Phone</span>
+            <p>+92 (Your Number)</p>
           </div>
-
         </div>
 
-        <form>
-
+        <form onsubmit="handleSubmit(event)">
           <input type="text" placeholder="Your Name" required>
-
           <input type="email" placeholder="Your Email" required>
-
           <textarea placeholder="Your Message" required></textarea>
-
-          <button type="submit" class="btn btn-primary">Send Message</button>
-
+          <button type="submit">Send Message</button>
         </form>
 
       </div>
@@ -1121,29 +1232,141 @@
   <!-- FOOTER -->
 
   <footer>
-    <p>&copy; 2024 Asad Ali. All rights reserved.</p>
+    <p>&copy; 2024 Asad Ali | IT Systems Engineer | All Rights Reserved</p>
   </footer>
 
+
+  <!-- THREE.JS FOR 3D ANIMATIONS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
   <script>
+    // ============= 3D BACKGROUND ANIMATION =============
+
+    const canvas = document.getElementById('canvas3d');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 0);
+    camera.position.z = 50;
+
+    // Create rotating cubes
+    const geometry = new THREE.BoxGeometry(2, 2, 2);
+    const material = new THREE.MeshPhongMaterial({ 
+      color: 0x00ffae,
+      wireframe: true,
+      emissive: 0x00ffae,
+      emissiveIntensity: 0.3
+    });
+
+    const cubes = [];
+    for (let i = 0; i < 5; i++) {
+      const cube = new THREE.Mesh(geometry, material.clone());
+      cube.position.x = (Math.random() - 0.5) * 80;
+      cube.position.y = (Math.random() - 0.5) * 80;
+      cube.position.z = (Math.random() - 0.5) * 40;
+      cube.rotation.x = Math.random() * Math.PI;
+      cube.rotation.y = Math.random() * Math.PI;
+      cube.speed = Math.random() * 0.005 + 0.002;
+      scene.add(cube);
+      cubes.push(cube);
+    }
+
+    // Add lighting
+    const light = new THREE.PointLight(0x00ffae, 1, 200);
+    light.position.set(30, 30, 30);
+    scene.add(light);
+
+    const ambientLight = new THREE.AmbientLight(0x00ffae, 0.2);
+    scene.add(ambientLight);
+
+    // Animation loop
+    function animateCubes() {
+      requestAnimationFrame(animateCubes);
+
+      cubes.forEach(cube => {
+        cube.rotation.x += cube.speed;
+        cube.rotation.y += cube.speed * 0.8;
+        cube.position.z += Math.sin(Date.now() * cube.speed) * 0.1;
+      });
+
+      renderer.render(scene, camera);
+    }
+
+    animateCubes();
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // ============= UI INTERACTIONS =============
+
     function toggleMenu() {
       const navLinks = document.getElementById('navLinks');
       navLinks.classList.toggle('active');
     }
 
     // Animate skill bars on scroll
-    document.addEventListener('DOMContentLoaded', function() {
-      const skillBars = document.querySelectorAll('.skill-progress');
-      
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const width = entry.target.getAttribute('data-width');
-            entry.target.style.width = width;
-          }
-        });
-      }, { threshold: 0.5 });
+    const observerOptions = {
+      threshold: 0.5
+    };
 
-      skillBars.forEach(bar => observer.observe(bar));
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const progressBars = entry.target.querySelectorAll('.skill-progress');
+          progressBars.forEach(bar => {
+            const width = bar.getAttribute('data-width');
+            bar.style.width = width;
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.skills-grid').forEach(el => observer.observe(el));
+
+    // Handle form submission
+    function handleSubmit(event) {
+      event.preventDefault();
+      alert('Thank you for your message! I will get back to you soon.');
+      event.target.reset();
+    }
+
+    // Smooth scroll offset for fixed header
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.getElementById('navLinks').classList.remove('active');
+          }
+        }
+      });
+    });
+
+    // Add mouse movement effect to project cards
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+      });
     });
   </script>
 
